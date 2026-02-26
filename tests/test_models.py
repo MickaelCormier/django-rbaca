@@ -64,7 +64,7 @@ class TestRoleModel(TestCase):
     def test_role_grant_perms(self):
         self.senior_role.grant_perms(self.permissions)
         self.senior_role.refresh_from_db()
-        self.assertQuerysetEqual(self.senior_role.permissions.all(), self.permissions)
+        self.assertQuerySetEqual(self.senior_role.permissions.all(), self.permissions)
 
     def test_role_grant_perms_not_iterable(self):
         self.senior_role.grant_perms(self.permissions.first())
@@ -81,7 +81,7 @@ class TestRoleModel(TestCase):
         self.senior_role.grant_perms(self.permissions)
         self.senior_role.revoke_perms(self.permissions)
         self.senior_role.refresh_from_db()
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             self.senior_role.permissions.all(), Permission.objects.none()
         )
 
@@ -99,7 +99,7 @@ class TestRoleModel(TestCase):
     def test_role_role_perms(self):
         self.senior_role.grant_perms(self.permissions)
         role_perms = self.senior_role.role_perms()
-        self.assertQuerysetEqual(role_perms, self.permissions)
+        self.assertQuerySetEqual(role_perms, self.permissions)
 
     def test_role_set_senior_role(self):
         self.junior_role.senior_role = None
@@ -235,7 +235,7 @@ class TestSessionModel(TestCase):
         session = Session.manage.add_session(self.user, [self.role1, self.role2])
         session_perms = session.session_perms()
 
-        self.assertQuerysetEqual(session_perms, self.permissions)
+        self.assertQuerySetEqual(session_perms, self.permissions)
 
     def test_session_close(self):
         session = Session.objects.create(user=self.user)
@@ -311,7 +311,7 @@ class TestRoleExpirationModel(TestCase):
         )
         RoleExpiration.manage.remove_expired_roles()
 
-        self.assertQuerysetEqual(self.user.roles.all(), Role.objects.none())
+        self.assertQuerySetEqual(self.user.roles.all(), Role.objects.none())
 
     def test_role_expiration_uuid_generation(self):
         expiration_date = now()
