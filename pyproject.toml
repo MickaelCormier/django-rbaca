@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-rbaca"
-version = "1.2.2"
+version = "1.2.3"
 description = "Role-based access control with attributes for Django"
 authors = ["Steven Bruch", "Mickael Cormier", "Lukas Möhlenkamp-Röttger"]
 readme = "README.md"

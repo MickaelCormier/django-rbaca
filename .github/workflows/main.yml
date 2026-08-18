@@ -47,13 +47,18 @@ jobs:
   docs:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' 
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd-theme myst_parser django==5.2.17
+          pip install poetry
+          poetry config virtualenvs.create false
+          poetry install --no-interaction
       - name: Sphinx build
         run: |
           sphinx-build doc _build

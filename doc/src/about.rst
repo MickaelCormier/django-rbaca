@@ -22,6 +22,7 @@ Features
 - **Role Based Backend**: `django-rbaca` provides a comprehensive Role Based Backend for managing role-based access control (RBAC) within your Django application. This feature allows you to define, assign, and enforce roles, ensuring controlled access to different parts of your application.
 
 - **Distributed Access Control**:  `django-rbaca` provides API endpoints to check for permission in distributed knots with JSON Web Tokens, based on the REST Framework for Django.
+
 Getting Started
 ---------------
 

@@ -9,7 +9,7 @@ pipeline on that commit automatically after pushing. You can also go into the me
 to merge automatically when the pipeline succeeds.
 
 Q: How do I build the documentation locally?
------------------------------------
+--------------------------------------------
 
 A: Install the requirements with poetry, move into the documentation folder and run
 
