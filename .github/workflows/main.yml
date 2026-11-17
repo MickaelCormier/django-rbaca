@@ -22,8 +22,37 @@ jobs:
       - name: Run tests
         run: docker run django-rbaca:latest poetry run python run_tests.py
 
+  compatibility:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: '3.11'
+            django: '4.2'
+          - python: '3.11'
+            django: '5.0'
+          - python: '3.11'
+            django: '5.1'
+          - python: '3.11'
+            django: '5.2'
+          - python: '3.12'
+            django: '6.0'
+          - python: '3.12'
+            django: '6.1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install dependencies
+        run: python -m pip install . "Django~=${{ matrix.django }}.0"
+      - name: Run tests
+        run: python run_tests.py
+
   publish:
-    needs: test
+    needs: [test, compatibility]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '--publish')
     steps:
@@ -45,7 +74,7 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
 
   docs:
-    needs: test
+    needs: [test, compatibility]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:

@@ -29,6 +29,9 @@ The project offers a Django app for easy integration into existing projects. It 
 
 ## Installation
 
+Requires Python 3.11 or newer and Django >=4.2,<6.2. Django 6.0 and 6.1
+require Python 3.12 or newer; Python 3.11 uses Django 4.2 through 5.2.
+
 **Using pip (from PyPI):**
 
 ```bash
